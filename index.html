@@ -1,60 +1,352 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>AverageCryptoNerd</title>
-        <link rel="icon" type="image/x-icon" href="assets/profile.png">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-        <link rel="stylesheet" href="assets/halloween.css">
-    </head>
-    <body>
-        <div class="profile-card">
-            <div class="profile-image">
-                <img src="assets/profile.png" alt="Profile Picture" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='ACN';">
-            </div>
-            
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AverageCryptoNerd</title>
+    <meta name="description" content="AverageCryptoNerd's digital portfolio. Developer, content creator, and tech enthusiast." />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #121212;
+            color: #f2f2f2;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 768px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        .header-image {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #f2f2f2;
+        }
+
+        .handle {
+            font-size: 1.125rem;
+            color: #999;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 0.375rem;
+            color: #f2f2f2;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: border-color 0.2s;
+        }
+
+        .social-link:hover {
+            border-color: #d97706;
+        }
+
+        .social-link svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .collapsible-button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 0.375rem;
+            color: #f2f2f2;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: left;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+
+        .collapsible-button:hover {
+            border-color: #d97706;
+        }
+
+        .chevron {
+            width: 1.25rem;
+            height: 1.25rem;
+            transition: transform 0.2s;
+        }
+
+        .chevron.rotated {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .collapsible-content.open {
+            max-height: 500px;
+        }
+
+        .repos-list {
+            margin-top: 1rem;
+            padding-left: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .repo-link {
+            display: block;
+            color: #f2f2f2;
+            text-decoration: none;
+        }
+
+        .repo-name {
+            color: #d97706;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .repo-link:hover .repo-name {
+            text-decoration: underline;
+        }
+
+        .repo-description {
+            color: #999;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .external-icon {
+            width: 1rem;
+            height: 1rem;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+
+        .repo-link:hover .external-icon {
+            opacity: 1;
+        }
+
+        .divider {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .code-inline {
+            color: #d97706;
+            font-family: monospace;
+        }
+
+        .text-content {
+            color: #999;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .text-content strong {
+            color: #f2f2f2;
+        }
+
+        .email-code {
+            display: inline-block;
+            padding: 0.125rem 0.5rem;
+            background-color: #262626;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            font-family: monospace;
+        }
+
+        .crypto-box {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 0.375rem;
+            padding: 1rem;
+        }
+
+        pre {
+            font-size: 0.875rem;
+            color: #f2f2f2;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .crypto-line {
+            margin-top: 0.5rem;
+        }
+
+        .crypto-line:first-child {
+            margin-top: 0;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.875rem;
+            }
+
+            .social-links {
+                flex-direction: column;
+            }
+
+            .social-link {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-image">
+            <img src="https://i.imgur.com/KJPksBx.gif" alt="AverageCryptoNerd">
+        </div>
+
+        <div class="profile">
             <h1>AverageCryptoNerd</h1>
-            <div class="handle">@basicallyavg.dev</div>
-            <div class="handle description">boo. did I scare you? i think i did..</div>
+            <p class="handle">@basicallyavg.dev</p>
 
             <div class="social-links">
-                <a href="https://github.com/averagecryptonerd" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <a href="https://github.com/averagecryptonerd" class="social-link" target="_blank" rel="noopener noreferrer">
                     <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 
-                        0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416
-                        -.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729
-                        1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997
-                        .107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 
-                        0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 
-                        0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 
-                        1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23 
-                        .653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 
-                        0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293
-                        c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 
-                        0-6.627-5.373-12-12-12z"/>
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                     </svg>
+                    <span>GitHub</span>
                 </a>
-
-                <a href="https://twitch.tv/averagecryptonerd" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitch">
+                <a href="https://twitch.tv/averagecryptonerd" class="social-link" target="_blank" rel="noopener noreferrer">
                     <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24
-                        l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
+                        <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
                     </svg>
+                    <span>Twitch</span>
                 </a>
-
-                <a href="https://youtube.com/@averagecryptonerd" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
-                        <path d="M581.7 188.1C575.5 164.4 556.9 145.8 533.4 139.5C490.9 128 320.1 128 320.1 128C320.1 128 
-                        149.3 128 106.7 139.5C83.2 145.8 64.7 164.4 58.4 188.1C47 231 47 320.4 47 320.4C47 320.4 
-                        47 409.8 58.4 452.7C64.7 476.3 83.2 494.2 106.7 500.5C149.3 512 320.1 512 320.1 512C320.1 512 
-                        490.9 512 533.5 500.5C557 494.2 575.5 476.3 581.8 452.7C593.2 409.8 593.2 320.4 593.2 320.4C593.2 
-                        320.4 593.2 231 581.8 188.1zM264.2 401.6L264.2 239.2L406.9 320.4L264.2 401.6z"/>
+                <a href="https://youtube.com/@averagecryptonerd" class="social-link" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 640 640" fill="currentColor">
+                        <path d="M581.7 188.1C575.5 164.4 556.9 145.8 533.4 139.5C490.9 128 320.1 128 320.1 128C320.1 128 149.3 128 106.7 139.5C83.2 145.8 64.7 164.4 58.4 188.1C47 231 47 320.4 47 320.4C47 320.4 47 409.8 58.4 452.7C64.7 476.3 83.2 494.2 106.7 500.5C149.3 512 320.1 512 320.1 512C320.1 512 490.9 512 533.5 500.5C557 494.2 575.5 476.3 581.8 452.7C593.2 409.8 593.2 320.4 593.2 320.4C593.2 320.4 593.2 231 581.8 188.1zM264.2 401.6L264.2 239.2L406.9 320.4L264.2 401.6z"/>
                     </svg>
+                    <span>YouTube</span>
                 </a>
             </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    </body>
+        <section class="section">
+            <button class="collapsible-button" onclick="toggleRepos()">
+                <svg class="chevron" id="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+                <span>📌 Popular Repositories</span>
+            </button>
+
+            <div class="collapsible-content" id="reposContent">
+                <div class="repos-list">
+                    <a href="https://github.com/averageCryptoNerd/copypasta" class="repo-link" target="_blank" rel="noopener noreferrer">
+                        <div class="repo-name">
+                            💾 Copypasta
+                            <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </div>
+                        <p class="repo-description">A lightweight and open-source file storage server created in Javascript!</p>
+                    </a>
+                    <a href="https://github.com/averageCryptoNerd/Kleurr" class="repo-link" target="_blank" rel="noopener noreferrer">
+                        <div class="repo-name">
+                            🌈 Kleurr
+                            <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </div>
+                        <p class="repo-description">A lightweight console log beautifier built with simplicity and user-experience in mind!</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section divider">
+            <h3><span class="code-inline">DONATIONS:</span></h3>
+            <p class="text-content">
+                If you've found what I code useful and want to donate, <strong>Thank you</strong>, but please note I will not be able to offer anything in return; no support of any kind, not even prioritized features/bugfixes. I'm doing this just for fun, and don't want to make it a responsibility. And like the license says, you're still using it entirely on your own risk :3
+            </p>
+            <p class="text-content">
+                I currently accept donations with the cryptocurrencies listed below. If your preferred crypto isn't included and you're willing to cover swap fees, feel free to reach out to me at <span class="email-code">iam@basicallyavg.dev</span> and I'll work something out! Thank you for your support!
+            </p>
+
+            <div class="crypto-box">
+                <pre>btc legacy: 17doaMc59kUHc9aGdP5bDxCXfq6xpJbLhb<div class="crypto-line">eth: 0x0cd955f6b2e0f54fca3e95ddb49cb92885927e8d</div><div class="crypto-line">doge: DT7HJRtU748BAWyAiu6heMcz1o5JZrb2BN</div></pre>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function toggleRepos() {
+            const content = document.getElementById('reposContent');
+            const chevron = document.getElementById('chevron');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                chevron.classList.remove('rotated');
+            } else {
+                content.classList.add('open');
+                chevron.classList.add('rotated');
+            }
+        }
+    </script>
+</body>
 </html>
